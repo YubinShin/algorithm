@@ -1,39 +1,20 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.StringTokenizer;
+// " " 공백문자가 여러개 올경우 split의 경우 오류가 발생합니다 tokenizer의 true 로 사용하시는 걸 추천드립니다.
 
 class Solution {
     public String solution(String s) {
-        String answer = "";
-    	
-    	// " " 기준으로 문자열 잘라서 배열에 넣음
-    	String[] arr = s.split(" ");
-    	// 잘린 문자열을 순서대로 처리
-    	for(int i=0; i<arr.length; i++) {
-    		String now = arr[i];
-    		
-    		// 문자열의 길이가 0이라면(공백 이라면)
-    		// answer에 " "만 추가
-    		if(arr[i].length() == 0) {
-    			answer += " ";
-    		} 
-    		// 문자가 있다면
-    		else {
-    			// 0번째 문자는 대문자로
-    			answer += now.substring(0, 1).toUpperCase();
-    			// 1번째 문자부터 마지막까지는 소문자로
-    			answer += now.substring(1, now.length()).toLowerCase();
-    			// 마지막에 " " 추가
-    			answer += " ";
-    		}
-    		
-    	}
-    	
-    	// 입력 받은 문자열의 맨 마지막이 " " 라면 바로 answer 반환
-    	if(s.substring(s.length()-1, s.length()).equals(" ")){
-    		return answer;
-    	}
-    	
-    	// 맨 마지막 " " 제거하고 answer 반환
-        return answer.substring(0, answer.length()-1);
+    s = s.toLowerCase();
+    StringTokenizer st = new StringTokenizer(s, " ", true);
+    System.out.println(st);
+    StringBuilder sb = new StringBuilder();
+    while (st.hasMoreTokens()) {
+      String word = st.nextToken();
+      // 만약 단어가 공백이면 그대로 출력해주고
+      if (word.equals(" ")) sb.append(word); else {
+        //아니라면 첫글자 대문자 변환해주기
+        sb.append(word.substring(0, 1).toUpperCase() + word.substring(1));
+      }
+    }
+    return sb.toString();                
     }
 } 
