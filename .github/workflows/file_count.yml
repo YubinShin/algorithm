@@ -1,0 +1,24 @@
+name: File Count Workflow
+
+on: [push]  # 워크플로우가 실행될 이벤트 설정
+
+jobs:
+  count_files:
+    runs-on: ubuntu-latest  # 작업이 실행될 환경
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2  # 리포지토리 체크아웃
+
+      - name: Count Files
+        run: |
+          java_count=$(find . -type f -name "*.java" | wc -l)
+          sql_count=$(find . -type f -name "*.sql" | wc -l)
+          undefined_count=$(find . -type f -not -name "*.*" | wc -l)
+          total_files=$(find . -type f | wc -l)
+          java_ratio=$(echo "scale=2; $java_count/$total_files*100" | bc)
+          sql_ratio=$(echo "scale=2; $sql_count/$total_files*100" | bc)
+          undefined_ratio=$(echo "scale=2; $undefined_count/$total_files*100" | bc)
+          echo "Java files: $java_count ($java_ratio%)"
+          echo "SQL files: $sql_count ($sql_ratio%)"
+          echo "Undefined files: $undefined_count ($undefined_ratio%)"
