@@ -9,3 +9,7 @@ FROM ONLINE_SALE
 WHERE SALES_DATE >= '2022-03-01' AND SALES_DATE  <= '2022-03-31' 
 
 ORDER BY SALES_DATE, PRODUCT_ID, USER_ID;
+
+-- BETWEEN 보다 부등호가 더 정확하고 나음
+-- now() 현재 DATETIME는 이렇게 써주면 됨 현재시간을 밀리세컨드까지 해줌
+-- date_format(날짜시간, '%y %m %d %h %s')
