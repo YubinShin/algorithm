@@ -1,0 +1,3 @@
+SELECT COUNT(DISTINCT NAME) FROM ANIMAL_INS;
+
+-- DISTINCT 는 자동으로 NULL을 제외하고 고유한 비-NULL 값들만을 카운트
