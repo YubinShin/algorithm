@@ -25,11 +25,11 @@ jobs:
 
           # 마크다운 바 차트 생성
           bar_chart="Java files ($java_ratio%): "
-          for i in $(seq 1 $java_ratio); do bar_chart+="❚"; done
+          for i in $(seq 1 $java_ratio); do bar_chart+="✓"; done
           bar_chart+=" $java_ratio%<br/>SQL files ($sql_ratio%): "
-          for i in $(seq 1 $sql_ratio); do bar_chart+="❚"; done
+          for i in $(seq 1 $sql_ratio); do bar_chart+="✓"; done
           bar_chart+=" $sql_ratio%<br/>Undefined files ($undefined_ratio%): "
-          for i in $(seq 1 $undefined_ratio); do bar_chart+="❚"; done
+          for i in $(seq 1 $undefined_ratio); do bar_chart+="✓"; done
           bar_chart+=" $undefined_ratio%"
 
           # README 업데이트
