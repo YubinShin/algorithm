@@ -1,0 +1,20 @@
+SELECT 
+    RI.REST_ID, 
+    RI.REST_NAME, 
+    RI.FOOD_TYPE, 
+    RI.FAVORITES, 
+    RI.ADDRESS, 
+    ROUND(AVG(RR.REVIEW_SCORE), 2) AS SCORE
+FROM 
+    REST_INFO RI
+JOIN 
+    REST_REVIEW RR ON RI.REST_ID = RR.REST_ID
+WHERE
+    RI.ADDRESS LIKE '서울%'
+GROUP BY 
+    RI.REST_ID, RI.REST_NAME, RI.FOOD_TYPE, RI.FAVORITES, RI.ADDRESS
+ORDER BY 
+    SCORE DESC, FAVORITES DESC;
+
+
+-- 대부분의 SQL 구현에서는 집계 함수와 함께 사용되는 모든 비집계 컬럼을 GROUP BY 절에 명시해야 합니다. 이는 쿼리의 의도를 명확하게 하고, 결과의 예측 가능성과 일관성을 보장합니다.
