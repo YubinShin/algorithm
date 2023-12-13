@@ -35,7 +35,14 @@ jobs:
           # README 업데이트
           sed -i "/<!-- file_counts_start -->/,/<!-- file_counts_end -->/c\<!-- file_counts_start -->\n$bar_chart\n<!-- file_counts_end -->" README.md
 
+      - name: Check for Changes
+        id: git_check
+        run: |
+          git diff
+          git diff-index --quiet HEAD || echo "::set-output name=changes::true"
+
       - name: Commit and Push README Updates
+        if: steps.git_check.outputs.changes == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
